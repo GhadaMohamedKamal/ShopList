@@ -3,9 +3,10 @@ package com.example.shoppinglist.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
+
+import com.example.shoppinglist.exception.ItemNotFoundException;
 import com.example.shoppinglist.model.Item;
 import com.example.shoppinglist.repository.ItemRepository;
 
@@ -37,6 +38,13 @@ public class ItemService {
     public void deleteItem(Long id) {
         itemRepository.deleteById(id);
     }
-}
+   
+	public Item getItemById(Long id) {
+		// TODO Auto-generated method stub
+
+        return itemRepository.getItemById(id).orElseThrow(() 
+        		-> new ItemNotFoundException("Unable to find the Item with ID: " + id));
+    }
+	}
 
 
