@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import com.example.shoppinglist.exception.ItemNotFoundException;
 import com.example.shoppinglist.model.Item;
 import com.example.shoppinglist.repository.ItemRepository;
@@ -24,15 +23,8 @@ public class ItemService {
         return itemRepository.save(item);
     }
 
-    public Item updateItem(Long id, Item updatedItem) {
-        Item existingItem = itemRepository.findById(id)
-                .orElseThrow();
-        
-        existingItem.setName(updatedItem.getName());
-        existingItem.setQuantity(updatedItem.getQuantity());
-        existingItem.setPrice(updatedItem.getPrice());
-        
-        return itemRepository.save(existingItem);
+    public Item updateItem(Item item){
+        return itemRepository.save(item);
     }
 
     public void deleteItem(Long id) {
