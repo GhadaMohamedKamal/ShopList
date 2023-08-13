@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.bosch.ordermanager.modell.Candidate;
 import com.example.shoppinglist.model.Item;
 import com.example.shoppinglist.service.ItemService;
 
@@ -47,12 +47,14 @@ public class ItemController {
         return new ResponseEntity<>(item, HttpStatus.OK);
     }
     
-    @PutMapping("{id}")
-    public Item updateItem(@PathVariable Long id, @RequestBody Item newItem) {
-        return itemService.updateItem(id, newItem);
+  
+    @PutMapping("/update")
+    public ResponseEntity<Item> updateItem(@RequestBody Item item){
+        Item updateItem = itemService.updateItem(item);
+        return new ResponseEntity<>(updateItem, HttpStatus.OK);
     }
-    
-    @DeleteMapping("{id}")
+
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteItem(@PathVariable("id") Long id){
         itemService.deleteItem(id);
         return new ResponseEntity<>(HttpStatus.OK);
